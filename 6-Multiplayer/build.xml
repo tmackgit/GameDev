@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<!-- ======================================================================= -->
+<!-- Ant build file for ChatterBox, GameServer, and RPS                      -->
+<!-- ======================================================================= -->
+
+<project name="javagamebook_server" default="build" basedir=".">
+  <property name="srcdir" value="src"/>
+  <property name="destdir" value="bin"/>
+  <property name="confdir" value="conf"/>
+  <property name="resdir" value="res"/>
+  <property name="libdir" value="lib"/>
+  <property name="docdir" value="doc"/>
+  <property name="tempdir" value="tmpclasses"/>
+
+  <property name="build.compiler" value="modern"/>
+  <property name="build.compiler.emacs" value="on"/>
+
+  <property file="${user.home}/.ant.properties" />
+
+  <property name="classpath" value="${tempdir}:${libdir}/log4j-1.2.6.jar"/>
+
+  <!-- =================================================================== -->
+  <!-- Compiles the source code                                            -->
+  <!-- =================================================================== -->
+  <target name="compile">
+    <mkdir dir="${tempdir}"/>
+    <javac srcdir="${srcdir}"
+           destdir="${tempdir}"
+           classpath="${classpath}"
+           debug="on"
+           deprecation="on"
+           optimize="off" >
+	   <include name="**/*.java"/>
+    </javac>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Clean                                                               -->
+  <!-- =================================================================== -->
+  <target name="clean">
+    <delete dir="${tempdir}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Build                                                               -->
+  <!-- =================================================================== -->
+  <target name="build" depends="compile">
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Cleans and Rebuilds the jar file                                    -->
+  <!-- =================================================================== -->
+  <target name="rebuild" depends="clean, build"/>
+
+  <!-- =================================================================== -->
+  <!-- Javadoc                                                             -->
+  <!-- =================================================================== -->
+  <target name="javadoc">
+
+    <delete dir="${docdir}" failonerror="false"/>
+    <mkdir dir="${docdir}"/>
+
+    <javadoc
+        destdir="${docdir}"
+        access="private"
+        author="true"
+        version="true"
+        use="true">
+
+        <fileset dir="${srcdir}">
+          <include name="**/*.java"/>
+        </fileset>
+
+      <link href="http://java.sun.com/j2se/1.4.1/docs/api/"/>
+
+    </javadoc>
+
+  </target>
+
+</project>
