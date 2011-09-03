@@ -6,7 +6,7 @@ import java.util.ArrayList;
     The Animation class manages a series of images (frames) and
     the amount of time to display each frame.
 */
-public class Animation {
+public class Animation implements Cloneable {
 
     private ArrayList frames;
     private int currFrameIndex;
@@ -21,6 +21,13 @@ public class Animation {
         frames = new ArrayList();
         totalDuration = 0;
         start();
+    }
+    
+    public Object clone() {
+    	try	{
+    		return super.clone();
+    	}
+    	catch(Exception e){ return null; }
     }
 
 

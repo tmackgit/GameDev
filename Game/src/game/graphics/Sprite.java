@@ -1,9 +1,9 @@
 package game.graphics;
 import java.awt.Image;
 
-public class Sprite {
+public class Sprite implements Cloneable {
 
-    private Animation anim;
+    protected Animation anim;
     // position (pixels)
     private float x;
     private float y;
@@ -17,6 +17,14 @@ public class Sprite {
     public Sprite(Animation anim) {
         this.anim = anim;
     }
+    
+    public Object clone() {
+    	try	{
+    		return super.clone();
+    	}
+    	catch(Exception e){ return null; }
+    }
+
 
     /**
         Updates this Sprite's Animation and its position based
