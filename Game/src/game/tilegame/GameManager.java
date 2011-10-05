@@ -43,6 +43,8 @@ public class GameManager extends GameCore {
 
     private GameAction moveLeft;
     private GameAction moveRight;
+    private GameAction moveUp;
+    private GameAction moveDown;
     private GameAction jump;
     private GameAction exit;
 
@@ -92,6 +94,9 @@ public class GameManager extends GameCore {
     private void initInput() {
         moveLeft = new GameAction("moveLeft");
         moveRight = new GameAction("moveRight");
+        moveUp = new GameAction("moveUp");
+        moveDown = new GameAction("moveDown");
+        
         jump = new GameAction("jump",
             GameAction.DETECT_INITAL_PRESS_ONLY);
         exit = new GameAction("exit",
@@ -103,6 +108,8 @@ public class GameManager extends GameCore {
 
         inputManager.mapToKey(moveLeft, KeyEvent.VK_LEFT);
         inputManager.mapToKey(moveRight, KeyEvent.VK_RIGHT);
+        inputManager.mapToKey(moveUp, KeyEvent.VK_UP);
+        inputManager.mapToKey(moveDown, KeyEvent.VK_DOWN);   
         inputManager.mapToKey(jump, KeyEvent.VK_SPACE);
         inputManager.mapToKey(exit, KeyEvent.VK_ESCAPE);
     }
@@ -117,16 +124,24 @@ public class GameManager extends GameCore {
         Player player = (Player)map.getPlayer();
         if (player.isAlive()) {
             float velocityX = 0;
+            float velocityY = 0;
             if (moveLeft.isPressed()) {
                 velocityX-=player.getMaxSpeed();
             }
             if (moveRight.isPressed()) {
                 velocityX+=player.getMaxSpeed();
             }
+            if (moveUp.isPressed()) {
+            	velocityY-=player.getMaxSpeed();
+            }
+            if (moveDown.isPressed()) {
+            	velocityY+=player.getMaxSpeed();
+            }
             if (jump.isPressed()) {
                 player.jump(false);
             }
             player.setVelocityX(velocityX);
+            player.setVelocityY(velocityY);
         }
 
     }
@@ -300,11 +315,12 @@ public class GameManager extends GameCore {
     {
 
         // apply gravity
+    	/*
         if (!creature.isFlying()) {
             creature.setVelocityY(creature.getVelocityY() +
                 GRAVITY * elapsedTime);
         }
-
+		*/
         // change x
         float dx = creature.getVelocityX();
         float oldX = creature.getX();

@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 
 import game.graphics.*;
 import game.tilegame.sprites.*;
+import game.tilegame.TileMapRenderer;
 
 
 /**
@@ -179,7 +180,7 @@ public class ResourceManager {
         // add the player to the map
         Sprite player = (Sprite)playerSprite.clone();
         player.setX(TileMapRenderer.tilesToPixels(3));
-        player.setY(0);
+        player.setY(TileMapRenderer.tilesToPixels(newMap.getHeight()-2));
         newMap.setPlayer(player);
 
         return newMap;
