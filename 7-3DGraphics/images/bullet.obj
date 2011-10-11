@@ -1,0 +1,32 @@
+# OBJ - Wavefront object file
+# the javagamebook loader only understands these commands:
+#   mtllib <filename>    - load materials from an external .mtl file
+#   v <x> <y> <z>        - define a vertex with floating-point coords (x,y,z)
+#   f <v1> <v2> <v3> ... - define a new face. a face is a flat, convex polygon
+#                          with vertices in counter-clockwise order.
+#                          positive numbers indicate the index of the vertex that
+#                          is defined in the file. negative numbers indicate the
+#                          vertex defined relative to last vertex read. for
+#                          example, 1 indicates the first vertex in the file,
+#                          -1 means the last vertex read, and -2 is the vertex
+#                          before that.
+#   g <name>             - define a new group by name. the following faces are
+#                          added to the group.
+#   usemtl <name>        - use the named material (loaded from a .mtl file)
+#                          for the faces in this group.
+
+# load materials
+mtllib textures.mtl
+
+# a simple pyramid
+v  -3 -2 -2
+v  3 -2 -2
+v  0 -2 2
+v  0 3 0
+
+g bullet
+usemtl green
+f 1 2 3
+f 1 4 3
+f 1 2 4
+f 3 4 2
