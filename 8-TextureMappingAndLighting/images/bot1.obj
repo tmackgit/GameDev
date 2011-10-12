@@ -1,0 +1,89 @@
+# OBJ - Wavefront object file
+# the javagamebook loader only understands these commands:
+#   mtllib <filename>    - load materials from an external .mtl file
+#   v <x> <y> <z>        - define a vertex with floating-point coords (x,y,z)
+#   f <v1> <v2> <v3> ... - define a new face. a face is a flat, convex polygon
+#                          with vertices in counter-clockwise order.
+#                          positive numbers indicate the index of the vertex that
+#                          is defined in the file. negative numbers indicate the
+#                          vertex defined relative to last vertex read. for
+#                          example, 1 indicates the first vertex in the file,
+#                          -1 means the last vertex read, and -2 is the vertex
+#                          before that.
+#   g <name>             - define a new group by name. the following faces are
+#                          added to the group.
+#   usemtl <name>        - use the named material (loaded from a .mtl file)
+#                          for the faces in this group.
+
+# load materials
+mtllib textures.mtl
+
+# base
+v -32 0 -32
+v -32 0 32
+v 32 0 32
+v 32 0 -32
+
+v -32 16 -32
+v -32 16 32
+v 32 16 32
+v 32 16 -32
+
+v -4 40 -4
+v -4 40 4
+v 4 40 4
+v 4 40 -4
+
+g base
+usemtl texture_A
+f 1 2 6 5
+f 2 3 7 6
+f 3 4 8 7
+f 4 1 5 8
+
+f 5 6 10 9
+f 6 7 11 10
+f 7 8 12 11
+f 8 5 9 12
+
+#f 9 10 11 12
+
+# turretArm
+v -4 40 -4
+v -4 40 4
+v 4 40 4
+v 4 40 -4
+
+v 4 56 -4
+v 4 56 4
+v 12 56 4
+v 12 56 -4
+
+g turretArm
+usemtl texture_B
+f -8 -7 -3 -4
+f -7 -6 -2 -3
+f -6 -5 -1 -2
+f -5 -8 -4 -1
+#f -4 -3 -2 -1
+
+# turret
+v -44 56 -4
+v -44 64 -4
+v -44 64 4
+v -44 56 4
+
+v 20 56 -4
+v 20 64 -4
+v 20 64 4
+v 20 56 4
+
+g turret
+usemtl texture_C
+f -8 -7 -3 -4
+f -7 -6 -2 -3
+f -6 -5 -1 -2
+f -5 -8 -4 -1
+
+f -4 -3 -2 -1
+f -5 -6 -7 -8
