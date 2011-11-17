@@ -1,0 +1,42 @@
+# MTL - Wavefront material definition file
+# the javagamebook loader only understands these commands:
+#   newmtl <name>        - Define a new material by name.
+#   map_Kd <filename>    - Give the material a texture map.
+
+
+newmtl texture_A
+map_Kd texture_A.png
+
+newmtl texture_B
+map_Kd texture_B.png
+
+newmtl texture_C
+map_Kd texture_C.png
+
+newmtl texture_D
+map_Kd texture_D.png
+
+newmtl texture_E
+map_Kd texture_E.png
+
+newmtl wall1
+map_Kd wall1.png
+
+newmtl wall2
+map_Kd wall2.png
+
+newmtl black
+map_Kd black.png
+
+newmtl black
+map_Kd black.png
+
+newmtl white
+map_Kd white.png
+
+newmtl green
+map_Kd green.png
+
+newmtl red
+map_Kd red.png
+
