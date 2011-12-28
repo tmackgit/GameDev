@@ -1,0 +1,123 @@
+/*
+
+    Scripted methods can add functionality to different
+    GameObject notifications for each unique object. For example,
+    the methods for collision notifications for the "player"
+    object are:
+
+    playerFloorCollision()
+    playerWallCollision()
+    playerCeilingCollision()
+
+    Likewise, if "player" collides with the "box" object, these
+    methods are called:
+
+    player_boxCollision()
+    player_boxTouch()
+    player_boxRelease()
+
+    Also, the initLevel() method is called on startup.
+
+*/
+
+
+initLevel() {
+
+}
+
+
+
+// hot walls!
+playerWallCollision() {
+    //player.setJumping(true);
+}
+
+player_toyCollision() {
+    // make the player fly for 10 seconds
+    toy.setState(GameObject.STATE_DESTROYED);
+    player.setJumping(false);
+    player.setJumping(true);
+    player.setFlying(true);
+    delay(10000, "player.setFlying(false)");
+}
+
+player_toy2Collision() {
+    List path = new ArrayList();
+    path.add(new Vector3D(200,32,1800));
+    path.add(new Vector3D(512,32,1600));
+    setPath(toy2, path);
+}
+
+toy2_stairTriggerTouch() {
+    player_stairTriggerTouch();
+    toy2.setPathFinder(null);
+}
+
+/**
+    Functions to open and close a stairway.
+*/
+global.stairsOn = false;
+player_stairTriggerTouch() {
+    if (global.stairsOn) {
+        return;
+    }
+    openStairs();
+}
+
+openStairs() {
+    // swing the switch ("turret") to the "on" position
+    group = stairTrigger.getPolygonGroup().getGroup("turret");
+    group.getTransform().turnYTo(3.14159f, 0.005f);
+    // move the stairs up after 750 ms
+    delay(750, "toggleStairs(true)");
+    delay(5000, "closeStairs()");
+    global.stairsOn = true;
+}
+
+closeStairs() {
+    // swing the switch ("turret") to the "off" position
+    group = stairTrigger.getPolygonGroup().getGroup("turret");
+    group.getTransform().turnYTo(0, 0.005f);
+    // move the stairs down
+    toggleStairs(false);
+    delay(750, "global.stairsOn = false;");
+}
+
+toggleStairs(boolean raise) {
+    moveYTo(stair1, raise?192:0, .1f);
+    moveYTo(stair2, raise?192:0, .1f);
+    moveYTo(stair3, raise?192:0, .1f);
+    moveYTo(stair4, raise?192:0, .1f);
+    moveYTo(stair5, raise?192:0, .1f);
+    moveYTo(stair6, raise?128:0, .1f);
+    moveYTo(stair7, raise?64:0, .1f);
+}
+
+
+/**
+    Functions to open and close door1.
+*/
+
+player_doorTriggerTouch() {
+    // move the door up
+    moveDoor(180);
+}
+
+player_doorTriggerRelease() {
+    // move the door down
+    moveDoor(0);
+}
+
+moveDoor(int y) {
+    speed = .5f;
+    moveYTo(door1a, y, speed);
+    moveYTo(door1b, y, speed);
+    moveYTo(door1c, y, speed);
+    moveYTo(door1d, y, speed);
+    moveYTo(door1e, y, speed);
+    moveYTo(door1f, y, speed);
+    moveYTo(door1g, y, speed);
+
+}
+
+

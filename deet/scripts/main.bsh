@@ -1,0 +1,41 @@
+// helper methods for beanshell scripts
+// useful imports
+import com.brackeen.javagamebook.game.*;
+import com.brackeen.javagamebook.math3D.*;
+import com.brackeen.javagamebook.util.*;
+import com.brackeen.javagamebook.path.*;
+
+/**
+    Convenience  method for executing a statement after a specified
+    delay using the game task manager.
+*/
+delay(long delay, String statement) {
+    gameTaskManager.addTask(delay, new Runnable() {
+        run() {
+            this.interpreter.eval(statement);
+        }
+    });
+}
+
+setPath(PathBot bot, List path) {
+    bot.setPathFinder(new PathFinder() {
+        Iterator find(GameObject a, GameObject b) {
+            return path.iterator();
+        }
+
+
+        Iterator find(Vector3D start, Vector3D goal) {
+            return path.iterator();
+        }
+    });
+}
+
+
+moveYTo(GameObject object, int y, float speed) {
+    object.setFlying(true);
+    loc = new Vector3D(object.getLocation());
+    loc.y = y;
+    object.getTransform().moveTo(loc, speed);
+}
+
+
